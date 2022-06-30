@@ -25,7 +25,7 @@ public class HtmlParse {
         return this;
     }
 
-    public String getHtml(){ return  this.html; }
+    public Html getHtml(){ return  new Html().setHtml(html); }
 
     // data entry part
     public void putall(List<String> key,List<String> val)    {

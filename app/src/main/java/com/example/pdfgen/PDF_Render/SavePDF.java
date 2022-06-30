@@ -6,6 +6,8 @@ import android.print.PrintDocumentAdapter;
 import android.print.PrintJob;
 import android.print.PrintManager;
 import android.util.Base64;
+import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.WebView;
 
 
@@ -16,10 +18,14 @@ public class SavePDF {
     private WebView webView;
     private String filename;
     private HtmlParse htmlParse;
+    private ViewGroup vg;
 
-    public SavePDF(Context context, WebView webView, String filename,HtmlParse htmlParse) {
+    public SavePDF(Context context, ViewGroup vg, String filename,HtmlParse htmlParse) {
         this.context = context;
-        this.webView = webView;
+        this.vg = vg;
+        this.webView = new WebView(context);
+        webView.setVisibility(View.GONE);
+        vg.addView(webView);
         this.filename = filename;
         this.htmlParse = htmlParse;
         this.webView.loadData(Base64.encodeToString(htmlParse.parse().getHtml().getHtmlBytes(),Base64.NO_PADDING), "text/html", "base64");

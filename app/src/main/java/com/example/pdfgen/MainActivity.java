@@ -18,8 +18,14 @@ import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.pdfgen.PDF_Render.Html;
 import com.example.pdfgen.PDF_Render.HtmlParse;
 import com.example.pdfgen.PDF_Render.SavePDF;
+import com.example.pdfgen.PDF_Render.Tools.SaveHtmlPDF;
+import com.example.pdfgen.PDF_Render.Tools.Table.TableElement;
+import com.example.pdfgen.PDF_Render.Tools.Table.TableHead;
+import com.example.pdfgen.PDF_Render.Tools.Table.TableHtml;
+import com.example.pdfgen.PDF_Render.Tools.Table.TableRow;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -68,10 +74,26 @@ public class MainActivity extends AppCompatActivity {
         HtmlParse htmlParse = new HtmlParse(html);
         //// assign multiple values
         htmlParse.putall(keys,vals);
+
+
+
+
+
         /// single value assignment  using hash map
 //        HtmlParse htmlParse1 = new HtmlParse(html,str);
 
+        List<TableElement> te = new ArrayList<>();
+        String hm = "<html><body><table border='1'>";
+        for(int j=0;j<100;j++){
+//            te.add(new TableHead().add("1").add("2").add("3").add("4").add("5"));
+            hm += "<tr><td>"+j+"</td><td>Name</td><td>Address</td><td>"+svg+"</tr>";
+        }
+        hm+="</table></body></html>";
+        TableHtml tableHtml = new TableHtml(te);
+        Log.d("TAG", "onCreate: "+te.size());
 
+
+        String finalHm = hm;
         ((Button)findViewById(R.id.button)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,8 +103,8 @@ public class MainActivity extends AppCompatActivity {
 //                        new SavePDF(MainActivity.this,printWeb,"temp",htmlParse);
 //                        ViewGroup vg = MainActivity.this.findViewById(R.id.lay);
                         ViewGroup vg = MainActivity.this.findViewById(android.R.id.content);
-                        new SavePDF(MainActivity.this,vg,"temp",htmlParse);
-
+//                        new SavePDF(MainActivity.this,vg,"temp",htmlParse);
+                          new SaveHtmlPDF(MainActivity.this,vg,"temp12",new Html().setHtml(finalHm));
                     } else {
                         // Showing Toast message to user
                         Toast.makeText(MainActivity.this, "Not available for device below Android LOLLIPOP", Toast.LENGTH_SHORT).show();

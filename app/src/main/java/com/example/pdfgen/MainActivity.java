@@ -79,7 +79,8 @@ public class MainActivity extends AppCompatActivity {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                         // HTML
 //                        new SavePDF(MainActivity.this,printWeb,"temp",htmlParse);
-                        ViewGroup vg = MainActivity.this.findViewById(R.id.lay);
+//                        ViewGroup vg = MainActivity.this.findViewById(R.id.lay);
+                        ViewGroup vg = MainActivity.this.findViewById(android.R.id.content);
                         new SavePDF(MainActivity.this,vg,"temp",htmlParse);
 
                     } else {
